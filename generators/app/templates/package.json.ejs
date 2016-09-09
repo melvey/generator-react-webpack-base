@@ -1,7 +1,7 @@
 {
   "name": "<%= name %>",
   "version": "1.0.0",
-  "description": "A basic boilerplate for my react applications",
+  "description": "<%= description %>",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -48,6 +48,7 @@
     "jade": "^1.11.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+		<% if(redux) {%>"react-redux": "^4.4.5",<% } %>
     "react-router": "^2.0.1"
   }
 }
