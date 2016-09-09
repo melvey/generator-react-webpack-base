@@ -1,0 +1,26 @@
+@import '../variables.scss';
+
+$brand-color: #61dafb;
+
+:local(.container) {
+  margin: 0 auto;
+  padding: 20px 0;
+  max-width: $max-content-width;
+}
+
+:local(.heading) {
+	color: $gray-dark;
+	font-family: $font-family-heading;
+	font-size: 3em;
+	text-align: center;
+}
+
+:local(.content) {
+	font-family: $font-family-body;
+	text-align: center;
+	font-size: 2em;
+	color: $gray;
+}
+
+
+

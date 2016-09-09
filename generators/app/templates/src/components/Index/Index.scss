@@ -1,0 +1,20 @@
+@import '../variables.scss';
+
+$brand-color: #61dafb;
+
+:local(.root) {
+  color: $gray;
+}
+
+:local(.container) {
+  margin: 0 auto;
+  padding: 20px 0;
+  max-width: $max-content-width;
+}
+
+:local(.heading) {
+	color: $gray-dark;
+}
+
+
+
