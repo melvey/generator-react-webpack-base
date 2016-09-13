@@ -4,13 +4,13 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 
 module.exports = yeoman.Base.extend({
-  prompting: function () {
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the mind-blowing ' + chalk.red('generator-react-webpack-base') + ' generator!'
-    ));
+	prompting: function () {
+		// Have Yeoman greet the user.
+		this.log(yosay(
+			'Welcome to the mind-blowing ' + chalk.red('generator-react-webpack-base') + ' generator!'
+		));
 
-    var prompts = [
+		var prompts = [
 			{
 				type: 'input',
 				name: 'name',
@@ -29,25 +29,27 @@ module.exports = yeoman.Base.extend({
 				message: 'Use redux?',
 				default: false
 			}
-    ];
+		];
 
-    return this.prompt(prompts).then(function (props) {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    }.bind(this));
-  },
+		return this.prompt(prompts).then(function (props) {
+			// To access props later use this.props.someAnswer;
+			this.props = props;
+		}.bind(this));
+	},
 
-  writing: function () {
+	writing: function () {
 		this.fs.copyTpl(
-			this.templatePath('_package.json'),
+			this.templatePath('package.json.ejs'),
 			this.destinationPath('package.json'),
 			{
-				name: this.props.name
+				name: this.props.name,
+				description: this.props.description,
+				redux: this.props.redux
 			}
 		);
 
 		this.fs.copyTpl(
-			this.templatePath('src/views/_index.jade'),
+			this.templatePath('src/views/index.jade.ejs'),
 			this.destinationPath('src/views/index.jade'),
 			{
 				name: this.props.name,
@@ -55,12 +57,32 @@ module.exports = yeoman.Base.extend({
 			}
 		);
 
+		this.fs.copyTpl(
+			this.templatePath('src/server.js.ejs'),
+			this.destinationPath('src/server.js'),
+			{
+				redux: this.props.redux
+			}
+		);
+
+		this.fs.copyTpl(
+			this.templatePath('src/app.js.ejs'),
+			this.destinationPath('src/app.js'),
+			{
+				redux: this.props.redux
+			}
+		);
+
 		this.fs.copy(this.templatePath('src/*.js'), this.destinationPath('src'));
 		this.fs.copy(this.templatePath('src/webpack-config/*.js'), this.destinationPath('src/webpack-config'));
 		this.fs.copy(this.templatePath('src/components/**/*'), this.destinationPath('src/components'));
-  },
 
-  install: function () {
-    //this.installDependencies();
-  }
+		if(this.props.redux) {
+			this.fs.copy(this.templatePath('src/redux/**/*'), this.destinationPath('src/redux'));
+		}
+	},
+
+	install: function () {
+		//this.installDependencies();
+	}
 });
