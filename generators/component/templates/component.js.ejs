@@ -15,7 +15,7 @@ class <%= name %> extends Component {
 	}
 
   render() {
-		const className = this.props.className ? `${styles.content} ${this.props.className}`;
+		const className = this.props.className ? `${styles.content} ${this.props.className}` : styles.content;
 		return (
 				<div className={className}>
 				</div>
