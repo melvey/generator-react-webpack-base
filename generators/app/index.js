@@ -42,7 +42,7 @@ module.exports = yeoman.Base.extend({
 			this.templatePath('package.json.ejs'),
 			this.destinationPath('package.json'),
 			{
-				name: this.props.name,
+				name: this.props.name.trim().replace(/\s+/g, '_'),
 				description: this.props.description,
 				redux: this.props.redux
 			}
