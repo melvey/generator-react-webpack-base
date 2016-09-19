@@ -1,14 +1,5 @@
-function getEntrySources(sources) {
-    if (process.env.NODE_ENV !== 'production') {
-        sources.push('webpack-dev-server/client?http://localhost:8080');
-        sources.push('webpack/hot/only-dev-server');
-    }
-
-    return sources;
-}
-
 module.exports = {
-	entry: getEntrySources(['babel-polyfill', './src/app.js']),
+	entry: ['babel-polyfill', './src/app.js'],
     output: {
         publicPath: '/',
 				path: 'build/public',

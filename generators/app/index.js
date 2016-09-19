@@ -76,7 +76,7 @@ module.exports = yeoman.Base.extend({
 		this.fs.copy(this.templatePath('src/*.js'), this.destinationPath('src'));
 		this.fs.copy(this.templatePath('webpack.config.js'), this.destinationPath('webpack.config.js'));
 		this.fs.copy(this.templatePath('webpack-config/*.js'), this.destinationPath('webpack-config'));
-		this.fs.copy(this.templatePath('components/**/*'), this.destinationPath('components'));
+		this.fs.copy(this.templatePath('src/components/**/*'), this.destinationPath('src/components'));
 
 		if(this.props.redux) {
 			this.fs.copy(this.templatePath('src/redux/**/*'), this.destinationPath('src/redux'));

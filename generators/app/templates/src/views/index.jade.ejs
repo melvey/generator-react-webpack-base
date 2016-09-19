@@ -1,6 +1,7 @@
-html  
+doctype html
+html(lang="en")
 	head
-		title=<%= name %>
+		title <%= name %>
 		meta(charset='utf-8')
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')
 
@@ -11,5 +12,5 @@ html
 	body
 		#app!= content
 
-    each script in scripts
-      script(src='#{script}', defer)
+		each script in scripts
+			script(src='#{script}', defer)

@@ -1,4 +1,9 @@
-import actionTypes from '../core/actionTypes';
+/**
+* DummyReducer.js
+* A sample redux reducer
+**/
+
+import actionTypes from '../actionTypes';
 
 function copyDummyData(data) {
 	const newDummy = {

@@ -1,4 +1,5 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var nodeExternals = require('webpack-node-externals');
 
 module.exports = {
 	entry: ['babel-polyfill', './src/server.js'],
@@ -12,6 +13,7 @@ module.exports = {
 		__dirname: false,
 		__filename: false
 	},
+	externals: [nodeExternals()],
 	plugins: [
 		new ExtractTextPlugin('style.css')
 	],
