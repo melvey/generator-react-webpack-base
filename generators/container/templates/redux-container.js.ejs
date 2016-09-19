@@ -1,0 +1,13 @@
+import Relay, {Store} from 'react-relay';
+import {connect} from 'react-redux';
+import <%= component %> from '../components/<%= component %>';
+
+const mapStateToProps = (state) => ({
+	// Modify this to only include the required properties
+	...state
+});
+
+
+const ReduxContainer = connect(mapStateToProps)(<%= component ?>);
+
+export default ReduxContainer;
