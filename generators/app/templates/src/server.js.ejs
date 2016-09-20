@@ -35,7 +35,7 @@ app.use('*', async (req, res) => {
 			res.redirect(status.redirect, redirectLocation.pathname + redirectLocation.search);
 		} else if(renderProps) {
 			<% if(redux) { %>
-				const routerContext = <Provider store={store}><RouterContext environment={Relay.Store} {...renderProps} /></Provider>;
+				const routerContext = <Provider store={store}><RouterContext {...renderProps} /></Provider>;
 			<% } else { %>
 				const routerContext = <RouterContext {...renderProps} />;
 			<% } %>
