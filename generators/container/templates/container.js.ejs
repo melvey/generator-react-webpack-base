@@ -13,12 +13,12 @@ class <%= component %>Container extends Component {
 		this.props = props;
 	}
 
-  render() {
+	render() {
 		return (
-			<<%= component ?> ...this.props />
+			<<%= component %> {...this.props} />
 		);
-  }
+	}
 
 }
 
-export default <%= component %>Component;
+export default <%= component %>Container;

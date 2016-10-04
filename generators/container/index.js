@@ -9,17 +9,18 @@ module.exports = yeoman.Base.extend({
 		var prompts = [
 			{
 				type: 'input',
-				component: 'component',
-				message: 'Component component',
+				name: 'component',
+				message: 'Component to create container of',
 			},
 			{
 				type: 'config',
-				component: 'redux',
+				name: 'redux',
 				message: 'Use redux?',
 				default: false
 			}
 		];
 
+		console.log();
 		return this.prompt(prompts).then(function (props) {
 			// To access props later use this.props.someAnswer;
 			this.props = props;
@@ -33,7 +34,7 @@ module.exports = yeoman.Base.extend({
 			return letter.charAt(letter.length - 1).toUpperCase();
 		});
 
-		const dir = path.join('src/containers/', cleanName);
+		const dir = 'src/containers/';
 
 		if(this.props.redux) {
 				this.fs.copyTpl(
