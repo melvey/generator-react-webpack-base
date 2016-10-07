@@ -21,14 +21,6 @@ module.exports = yeoman.Base.extend({
 	},
 
 	writing: function () {
-		this.fs.copyTpl(
-			this.templatePath('src/server.js.ejs'),
-			this.destinationPath('src/server.js'),
-			{
-				redux: this.props.redux
-			}
-		);
-
 		if(this.props.redux) {
 			this.fs.copy(this.templatePath('src/redux/**/*'), this.destinationPath('src/redux'));
 
