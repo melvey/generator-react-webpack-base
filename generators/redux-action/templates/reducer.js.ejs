@@ -1,0 +1,22 @@
+/**
+* <%= filename %>
+* Redux Reducer for <%= name %>
+**/
+<% var actionUC = action.charAt(0).toUpperCase() + action.slice(1); %>
+import actionTypes from '../actionTypes';
+
+function handle<%= actionUC %>(data) {
+	const newState = {
+		<%= action %>: data
+	};
+	return newState;
+}
+
+export default function set<%= name %>Reducer(state, action) {
+	switch(action.type) {
+		case actionTypes.<%= action %>:
+			return handle<%= actionUC %>(action.payload);
+		default:
+			return state || {};
+	}
+}

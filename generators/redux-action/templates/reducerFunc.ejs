@@ -1,0 +1,7 @@
+function handle<%= action.charAt(0).toUpperCase() + action.slice(1) %>(data) {
+	const newState = {
+		<%= action %>: data
+	};
+	return newState;
+}
+
