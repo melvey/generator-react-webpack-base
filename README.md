@@ -22,6 +22,31 @@ Then generate your new project:
 ```bash
 yo react-webpack-base
 ```
+You will be prompted if you want to use redux or not. If you choose not to use redux and want to add it later you can run
+```bash
+yo react-webpack-base:redux
+```
+
+### Add a Component ###
+To add a new component run
+```bash
+yo react-webpack-base:component
+```
+This will create a new component in the components directory
+
+### Create a container ###
+To create a container for an existing component run
+```bash
+yo react-webpack-base:container
+```
+You will be prompted to select the component to wrap and if this is a redux container.
+
+### Create a redux action ###
+To create a new redux action use
+```bash
+yo react-webpack-base:redux-action
+```
+You will be prompted for the action name and the reducer to use. If the reducer does not exist it will be created (you will still need to add it to combine reducers).
 
 ## License
 
