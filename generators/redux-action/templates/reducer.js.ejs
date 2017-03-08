@@ -5,14 +5,14 @@
 <% var actionUC = action.charAt(0).toUpperCase() + action.slice(1); %>
 import actionTypes from '../actionTypes';
 
-function handle<%= actionUC %>(store, data) {
-  return Object.assign({}, store, {<%= action %>: data});
+function handle<%= actionUC %>(state, data) {
+  return Object.assign({}, state, {<%= action %>: data});
 }
 
 export default function set<%= name %>Reducer(state, action) {
 	switch(action.type) {
 		case actionTypes.<%= action %>:
-			return handle<%= actionUC %>(store, action.payload);
+			return handle<%= actionUC %>(state, action.payload);
 		default:
 			return state || {};
 	}
