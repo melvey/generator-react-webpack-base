@@ -38,8 +38,8 @@ module.exports = yeoman.Base.extend({
 		);
 
 		this.fs.copyTpl(
-			this.templatePath('component.js.ejs'),
-			this.destinationPath(path.join(dir, cleanName + '.js')),
+			this.templatePath('component.jsx.ejs'),
+			this.destinationPath(path.join(dir, cleanName + '.jsx')),
 			{
 				name: cleanName
 			}
