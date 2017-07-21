@@ -81,6 +81,8 @@ module.exports = yeoman.Base.extend({
 		if(this.props.redux) {
 			this.fs.copy(this.templatePath('src/redux/**/*'), this.destinationPath('src/redux'));
 		}
+
+		this.config.save();
 	},
 
 	install: function () {

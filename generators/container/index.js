@@ -9,7 +9,7 @@ module.exports = yeoman.Base.extend({
 	prompting: function () {
 
 		// Get existing components for prompt
-		var componentDir = 'src/components';
+		var componentDir = this.destinationPath('src/components');
 		var components = fs.readdirSync(componentDir).filter(function(file) {
 			return fs.statSync(path.join(componentDir, file)).isDirectory()
 		});
