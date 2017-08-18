@@ -1,6 +1,6 @@
 {
   "name": "generator-react-webpack-base",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A base template for a fullstack react webpack application",
   "homepage": "",
   "author": {
@@ -47,7 +47,7 @@
   },
   "repository": "melvey/generator-react-webpack-base",
   "scripts": {
-    "prepublish": "gulp prepublish",
+    "prepare": "gulp prepublish",
     "test": "gulp"
   },
   "license": "Apache-2.0"
