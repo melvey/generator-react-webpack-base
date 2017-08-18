@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styles from './Header.scss';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import logo from './logo.png';
 
 class Header extends Component {

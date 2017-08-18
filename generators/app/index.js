@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var mkdirp = require('mkdirp');
 
 module.exports = yeoman.Base.extend({
 	prompting: function () {
@@ -49,8 +50,8 @@ module.exports = yeoman.Base.extend({
 		);
 
 		this.fs.copyTpl(
-			this.templatePath('src/views/index.jade.ejs'),
-			this.destinationPath('src/views/index.jade'),
+			this.templatePath('src/views/index.pug.ejs'),
+			this.destinationPath('src/views/index.pug'),
 			{
 				name: this.props.name,
 				description: this.props.description
@@ -77,6 +78,9 @@ module.exports = yeoman.Base.extend({
 		this.fs.copy(this.templatePath('webpack.config.js'), this.destinationPath('webpack.config.js'));
 		this.fs.copy(this.templatePath('webpack-config/*.js'), this.destinationPath('webpack-config'));
 		this.fs.copy(this.templatePath('src/components/**/*'), this.destinationPath('src/components'));
+		this.fs.copy(this.templatePath('src/config/**/*'), this.destinationPath('src/config/templates'));
+		console.log(this.destinationPath('src/public'));
+		mkdirp.sync(this.destinationPath('src/public'));
 
 		if(this.props.redux) {
 			this.fs.copy(this.templatePath('src/redux/**/*'), this.destinationPath('src/redux'));

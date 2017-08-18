@@ -2,11 +2,13 @@ import path from 'path';
 import express from 'express';
 import React from 'react';
 import ReactDomServer from 'react-dom/server';
-import {match, RouterContext} from 'react-router';
+import {StaticRouter} from 'react-router';
 <% if(redux) { %>import {Provider} from 'react-redux';
-import store from './redux/store';<% } %>
-import indexTemplate from './views/index.jade';
-import routes from './routes';
+import store from './redux/store';
+import preloadStore from './redux/preloadStore';<% } %>
+import indexTemplate from './views/index.pug';
+import App from './components/App';
+import config from './config/general';
 
 const status = {
 	error: 500,
@@ -16,8 +18,10 @@ const status = {
 };
 
 
-// Data to send to jade template
-const config = {
+// Data to send to pug template
+const pugConfig = {
+	title: config.title,
+	description: config.description,
 	scripts: ['/app.js']
 };
 
@@ -27,28 +31,27 @@ const port = process.env.PORT || 5000;
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('*', async (req, res) => {
-	// res.render doesn't seem to work with webkit so we use webkit to load the jade template and render it here
-	match({routes, location: req.baseUrl || req.url}, (error, redirectLocation, renderProps) => {
-		if(error) {
-			res.status(status.error).send(error.message);
-		} else if(redirectLocation) {
-			res.redirect(status.redirect, redirectLocation.pathname + redirectLocation.search);
-		} else if(renderProps) {
-			<% if(redux) { %>
-				const routerContext = <Provider store={store}><RouterContext {...renderProps} /></Provider>;
-			<% } else { %>
-				const routerContext = <RouterContext {...renderProps} />;
-			<% } %>
+<% if(redux) { %>
+	preloadStore(store, req.originalUrl, req.user)
+		.then((loadedStore) => {
+			const context = {};
+			const contentHtml = ReactDomServer.renderToString(<Provider store={loadedStore}><StaticRouter location={req.originalUrl} context={context}><App basePath={config.basePath} /></StaticRouter></Provider>);
+			console.log(context);
 
-			const contentHtml = ReactDomServer.renderToString(routerContext);
-
-			const variables = {...config, content: contentHtml};
+			const variables = {...pugConfig, content: contentHtml, basePath: config.basePath, state: JSON.stringify(store.getState())};
 			const html = indexTemplate(variables);
 			res.status(status.success).send(html);
-		} else {
-			res.status(status.notFound).send('Not Found');
-		}
-	});
+		}).catch((err) => {
+			console.error(err);
+			res.status(status.error).send('Server error loading page');
+		});
+<% } else { %>
+	const context = {};
+	const contentHtml = ReactDomServer.renderToString(<StaticRouter location={req.originalUrl} context={context}><App basePath={config.basePath} /></StaticRouter>);
+	const variables = {...pugConfig, content: contentHtml, basePath: config.basePath};
+	const html = indexTemplate(variables);
+	res.status(status.success).send(html);
+<% } %>
 });
 
 app.listen(port, () => {
