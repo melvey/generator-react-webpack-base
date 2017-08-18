@@ -1,11 +1,18 @@
+var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var nodeExternals = require('webpack-node-externals');
+var webpack = require('webpack');
+var merge = require('lodash.merge');
+var config = require('../src/config/general.js');
+var BaseConfig = require('./webpack.base.config');
 
-module.exports = {
+ ServerTemplate = {
+
 	entry: ['babel-polyfill', './src/server.js'],
 	output: {
-		publicPath: '/',
-		path: 'build/public',
+		publicPath: config.basePath,
+		path: path.join(__dirname, '../build/public'),
 		filename: '../server.js'
 	},
 	target: 'node',
@@ -13,26 +20,49 @@ module.exports = {
 		__dirname: false,
 		__filename: false
 	},
-	externals: [nodeExternals()],
 	plugins: [
-		new ExtractTextPlugin('style.css')
+		new ExtractTextPlugin({filename: 'style.css'}),
+		new CopyWebpackPlugin([{from: 'src/public', to: '.'}]),
+		new webpack.DefinePlugin({
+			'global.GENTLY': false
+		})
 	],
+	externals: [nodeExternals()],
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.scss$/,
 				include: /src/,
-				loader: ExtractTextPlugin.extract(
-						'style',
-						'css',
-						'autoprefixer?browsers=last 3 versions',
-						'sass'
-				)
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: [
+						{
+							loader: 'css-loader',
+							options: {
+								sourceMap: true,
+								modules: true,
+								camelCase: true,
+								localIdentName: '[name]__[local]--[hash:base64:5]',
+							}
+						},
+						{
+							loader: 'sass-loader',
+							options: {
+								sourceMap: true
+							}
+						}
+					]
+				})
 			},
 			{
-				test: /\.jade$/,
-				loader: 'jade'
+				test: /\.pug/,
+				use: 'pug-loader'
 			}
 		]
 	}
 };
+
+var serverConfig = merge({}, BaseConfig, ServerTemplate);
+serverConfig.module.rules = BaseConfig.module.rules.concat(ServerTemplate.module.rules);
+
+module.exports = serverConfig;

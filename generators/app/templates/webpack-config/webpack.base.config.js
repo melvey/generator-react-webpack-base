@@ -1,33 +1,32 @@
 module.exports = {
 	devtool: 'eval',
 	module: {
-		preLoaders: [
-			{
-				test: /\.jsx?$/,
-				exclude: /(node_modules|bower_components)/,
-				loader: 'source-map'
-			},
-			{
-				test: /\.json$/,
-				loader: 'json'
-			}
-		],
-		loaders: [
+		rules: [
 			{
 				test: /\.(jpe?g|png|gif|svg)$/i,
-				loaders: [
-					'url?limit=8192',
-					'img'
+				use: [
+					'url-loader?limit=8192',
+					'img-loader'
 				]
+			},
+			{
+				test: /\.(eot|svg|woff(2)?|ttf)(\?[a-z0-9=&.]+)?$/,
+				use: 'file-loader'
 			},
 			{
 				test: /\.jsx?$/,
 				exclude: /(node_modules|bower_components)/,
-				loaders: [
-					'react-hot',
-					'babel?presets[]=es2015,presets[]=react,presets[]=stage-0'
+				use: [
+					'babel-loader?presets[]=react,presets[]=stage-0'
 				]
+			},
+			{
+				test: /\.sql$/,
+				use: 'raw-loader'
 			}
 		]
+	},
+	resolve: {
+		extensions: ['.js', 'jsx']
 	}
 };

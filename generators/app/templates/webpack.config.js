@@ -1,15 +1,15 @@
-var BaseConfig = require('./webpack-config/webpack.base.config');
-var AppTemplate = require('./webpack-config/webpack.app.config');
-var ServerTemplate = require('./webpack-config/webpack.server.config');
-var merge = require('lodash.merge');
+var fs = require('fs');
 
-// TODO: Write an alternate merge function that appends arrays instead of merging them
-var appConfig = merge({}, BaseConfig, AppTemplate);
-appConfig.module.loaders = BaseConfig.module.loaders.concat(AppTemplate.module.loaders);
+// The general template is fine to use as a config so put that in if it is missing
+var configFile = './src/config/general.js';
+var configTemplate = './src/config/templates/general.js';
+if(!fs.existsSync(configFile) && fs.existsSync(configTemplate)) {
+	fs.createReadStream(configTemplate).pipe(fs.createWriteStream(configFile));
+}
 
-var serverConfig = merge({}, BaseConfig, ServerTemplate);
-serverConfig.module.loaders = BaseConfig.module.loaders.concat(ServerTemplate.module.loaders);
 
-//module.exports = [appConfig, serverConfig];
+var appConfig = require('./webpack-config/webpack.app.config');
+var serverConfig = require('./webpack-config/webpack.server.config');
+
 module.exports = [appConfig, serverConfig];
 
