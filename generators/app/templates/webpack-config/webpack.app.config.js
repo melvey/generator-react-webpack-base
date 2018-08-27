@@ -29,7 +29,6 @@ var AppTemplate = {
 						}
 					},
 					'postcss-loader',
-					,
 					{
 						loader: 'sass-loader',
 						options: {

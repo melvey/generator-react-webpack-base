@@ -36,9 +36,6 @@ var BaseConfig = require('./webpack.base.config');
 				use: [
 					 MiniCssExtractPlugin.loader,
 					{
-						loader: 'style-loader'
-					},
-					{
 						loader: 'css-loader',
 						options: {
 							modules: true,
@@ -47,7 +44,6 @@ var BaseConfig = require('./webpack.base.config');
 						}
 					},
 					'postcss-loader',
-					,
 					{
 						loader: 'sass-loader',
 						options: {
