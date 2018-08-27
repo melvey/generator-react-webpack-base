@@ -1,5 +1,5 @@
 var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var nodeExternals = require('webpack-node-externals');
 var webpack = require('webpack');
@@ -21,7 +21,7 @@ var BaseConfig = require('./webpack.base.config');
 		__filename: false
 	},
 	plugins: [
-		new ExtractTextPlugin({filename: 'style.css'}),
+		new MiniCssExtractPlugin({filename: 'style.css'}),
 		new CopyWebpackPlugin([{from: 'src/public', to: '.'}]),
 		new webpack.DefinePlugin({
 			'global.GENTLY': false
@@ -33,26 +33,12 @@ var BaseConfig = require('./webpack.base.config');
 			{
 				test: /\.scss$/,
 				include: /src/,
-				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: [
-						{
-							loader: 'css-loader',
-							options: {
-								sourceMap: true,
-								modules: true,
-								camelCase: true,
-								localIdentName: '[name]__[local]--[hash:base64:5]',
-							}
-						},
-						{
-							loader: 'sass-loader',
-							options: {
-								sourceMap: true
-							}
-						}
-					]
-				})
+				use: [
+					 MiniCssExtractPlugin.loader,
+					 'css-loader',
+					 'postcss-loader',
+					 'sass-loader'
+			 ]
 			},
 			{
 				test: /\.pug/,

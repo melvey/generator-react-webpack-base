@@ -1,16 +1,15 @@
 import {render} from 'react-dom';
 import React from 'react';
-import {Router, browserHistory} from 'react-router';
+import {BrowserRouter} from 'react-router-dom';
 <% if(redux) { %>import {Provider} from 'react-redux';
 import store from './redux/store';<% } %>
-import routes from './routes';
 
 const appContainer = document.getElementById('app');
 
 <%if(redux) { %>
-const router = <Provider store={store}><Router history={browserHistory} routes={routes} /></Provider>
+const app = <Provider store={store}><BrowserRouter><App basePath={config.basePath} /></BrowserRouter></Provider>;
 <% } else { %>
-const router = <Router history={browserHistory} routes={routes} />;
+const app = <BrowserRouter><App basePath={config.basePath} /></BrowserRouter>;
 <% } %>
 
-render(router, appContainer);
+render(app, appContainer);
