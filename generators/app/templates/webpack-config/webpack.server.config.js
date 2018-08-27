@@ -35,9 +35,25 @@ var BaseConfig = require('./webpack.base.config');
 				include: /src/,
 				use: [
 					 MiniCssExtractPlugin.loader,
-					 'css-loader',
-					 'postcss-loader',
-					 'sass-loader'
+					{
+						loader: 'style-loader'
+					},
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							camelCase: true,
+							localIdentName: '[name]__[local]--[hash:base64:5]',
+						}
+					},
+					'postcss-loader',
+					,
+					{
+						loader: 'sass-loader',
+						options: {
+							outputStyle: 'expanded'
+						}
+					}
 			 ]
 			},
 			{

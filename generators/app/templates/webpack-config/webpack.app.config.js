@@ -28,12 +28,8 @@ var AppTemplate = {
 							localIdentName: '[name]__[local]--[hash:base64:5]',
 						}
 					},
-					{
-						loader: 'autoprefixer-loader',
-						options: {
-							browsers: 'last 3 versions'
-						}
-					},
+					'postcss-loader',
+					,
 					{
 						loader: 'sass-loader',
 						options: {
