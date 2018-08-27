@@ -6,11 +6,12 @@ html(lang="en")
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')
 
 
-		meta(name='description', content='#{<%= description %>}')
+		meta(name='description', content='<%= description %>')
 		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(type='text/css', rel='stylesheet', href='style.css')
 
 	body
 		#app!= content
 
 		each script in scripts
-			script(src='#{script}', defer)
+			script(src=script', defer)

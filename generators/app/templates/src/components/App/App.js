@@ -1,5 +1,6 @@
-import React, {Component, PropTypes} from 'react';
-import {Route, Redirect} from 'react-router';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {Route, Switch} from 'react-router-dom';
 import Header from '../Header';
 import styles from './App.scss';
 import Index from '../Index';
@@ -14,23 +15,25 @@ class App extends Component {
 		this.props = props;
 	}
 
-  static propTypes = {
-  };
+	static propTypes = {
+	};
 
-  render() {
+	render() {
 	const basePath = this.props.basePath || '/';
 
 	return (
 		<div>
 			<Header />
 			<div className={styles.appBody}>
-				<Route exact path={basePath} component={Index} />
-				<Route path="about" component={About} />
-				<Route path="*" component={NotFound} />
+				<Switch>
+					<Route exact path={basePath} component={Index} />
+					<Route path={`${basePath}about`} component={About} />
+					<Route component={NotFound} />
+				</Switch>
 			</div>
 		</div>
 	);
-  }
+	}
 
 }
 
