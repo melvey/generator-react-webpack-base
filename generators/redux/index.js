@@ -26,8 +26,8 @@ module.exports = yeoman.Base.extend({
 
 			var packageJSON = {
 				dependencies: {
-					redux: '^3.6.0',
-					'react-redux': '^4.4.5'
+					redux: '^4.0.0',
+					'react-redux': '^5.0.7'
 				}
 			};
 			this.fs.extendJSON('package.json', packageJSON);
