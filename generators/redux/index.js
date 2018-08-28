@@ -1,10 +1,10 @@
 'use strict';
-var yeoman = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 
-module.exports = yeoman.Base.extend({
-	prompting: function () {
+module.exports = class extends Generator {
+	prompting() {
 
 		var prompts = [
 			{
@@ -18,9 +18,9 @@ module.exports = yeoman.Base.extend({
 		return this.prompt(prompts).then(function (props) {
 			this.props = props;
 		}.bind(this));
-	},
+	}
 
-	writing: function () {
+	writing() {
 		if(this.props.redux) {
 			this.fs.copy(this.templatePath('src/redux/**/*'), this.destinationPath('src/redux'));
 
@@ -41,9 +41,9 @@ module.exports = yeoman.Base.extend({
 				this.fs.write(serverPath, serverJS);
 			}
 		}
-	},
+	}
 
-	install: function () {
+	install() {
 		this.installDependencies();
 	}
-});
+};

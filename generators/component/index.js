@@ -1,11 +1,11 @@
 'use strict';
-var yeoman = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var path = require('path');
 
-module.exports = yeoman.Base.extend({
-	prompting: function () {
+module.exports = class extends Generator {
+	prompting() {
 		var prompts = [
 			{
 				type: 'input',
@@ -18,9 +18,9 @@ module.exports = yeoman.Base.extend({
 			// To access props later use this.props.someAnswer;
 			this.props = props;
 		}.bind(this));
-	},
+	}
 
-	writing: function () {
+	writing() {
 
 		let cleanName = this.props.name.replace(/\s*\b\w/g, function(letter) {
 			console.log(letter);
@@ -50,9 +50,9 @@ module.exports = yeoman.Base.extend({
 			this.destinationPath(path.join(dir, cleanName + '.scss'))
 		);
 
-	},
+	}
 
-	install: function () {
+	install() {
 		//this.installDependencies();
 	}
-});
+};

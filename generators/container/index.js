@@ -1,12 +1,12 @@
 'use strict';
-var yeoman = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var fs = require('fs');
 var path = require('path');
 
-module.exports = yeoman.Base.extend({
-	prompting: function () {
+module.exports = class extends Generator {
+	prompting() {
 
 		// Get existing components for prompt
 		var componentDir = this.destinationPath('src/components');
@@ -34,9 +34,9 @@ module.exports = yeoman.Base.extend({
 			// To access props later use this.props.someAnswer;
 			this.props = props;
 		}.bind(this));
-	},
+	}
 
-	writing: function () {
+	writing() {
 
 		var cleanName = this.props.component.replace(/\s*\b\w/g, function(letter) {
 			console.log(letter);
@@ -62,9 +62,9 @@ module.exports = yeoman.Base.extend({
 					}
 				);
 		}
-	},
+	}
 
-	install: function () {
+	install() {
 		//this.installDependencies();
 	}
-});
+};

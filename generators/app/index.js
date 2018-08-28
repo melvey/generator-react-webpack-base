@@ -1,11 +1,11 @@
 'use strict';
-var yeoman = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var mkdirp = require('mkdirp');
 
-module.exports = yeoman.Base.extend({
-	prompting: function () {
+module.exports = class extends Generator {
+	prompting() {
 		// Have Yeoman greet the user.
 		this.log(yosay(
 			'Welcome to the mind-blowing ' + chalk.red('generator-react-webpack-base') + ' generator!'
@@ -36,9 +36,9 @@ module.exports = yeoman.Base.extend({
 			// To access props later use this.props.someAnswer;
 			this.props = props;
 		}.bind(this));
-	},
+	}
 
-	writing: function () {
+	writing() {
 		this.fs.copyTpl(
 			this.templatePath('package.json.ejs'),
 			this.destinationPath('package.json'),
@@ -87,9 +87,9 @@ module.exports = yeoman.Base.extend({
 		}
 
 		this.config.save();
-	},
+	}
 
-	install: function () {
+	install() {
 		//this.installDependencies();
 	}
-});
+};

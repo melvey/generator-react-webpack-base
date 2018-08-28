@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "eslint": "^3.19.0",
-    "eslint-config-xo-space": "^0.14.0",
     "gulp": "^4.0.0",
     "gulp-cli": "^2.0.1",
     "gulp-eslint": "^2.0.0",
@@ -42,7 +41,6 @@
     "yeoman-test": "^1.9.1"
   },
   "eslintConfig": {
-    "extends": "xo-space",
     "env": {
       "mocha": true
     }

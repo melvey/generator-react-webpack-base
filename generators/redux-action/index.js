@@ -1,5 +1,5 @@
 'use strict';
-var yeoman = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var inquirer = require('inquirer');
 var chalk = require('chalk');
 var ejs = require('ejs');
@@ -7,8 +7,8 @@ var path = require('path');
 var fs = require('fs');
 var yosay = require('yosay');
 
-module.exports = yeoman.Base.extend({
-	prompting: function () {
+module.exports = class extends Generator {
+	prompting() {
 
 		// Get existing components for prompt
 		var reducerDir = 'src/redux/reducers';
@@ -52,9 +52,9 @@ module.exports = yeoman.Base.extend({
 		return this.prompt(prompts).then(function (props) {
 			this.props = props;
 		}.bind(this));
-	},
+	}
 
-	writing: function () {
+	writing() {
 		var toCamelCase = function(string) {
 			return string.replace(/\s+\b\w/g, function(letter) {
 				return letter.charAt(letter.length - 1).toUpperCase();
@@ -116,8 +116,8 @@ module.exports = yeoman.Base.extend({
 				this.fs.write(reducerPath, reducerJS);
 			}
 		}
-	},
-
-	install: function () {
 	}
-});
+
+	install() {
+	}
+};
