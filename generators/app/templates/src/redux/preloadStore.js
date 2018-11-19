@@ -3,7 +3,7 @@ import 'babel-polyfill';
 const routes = [
 	{
 		match: /admin\/?$/, // Regex to match url
-		loader: (store, matches, user) => new Promise((resolve) => resolve()); // loader function should load data, update store and return a promise
+		loader: (store, matches, user) => new Promise((resolve) => resolve()) // loader function should load data, update store and return a promise
 	}
 ];
 
