@@ -110,7 +110,7 @@ module.exports = class extends Generator {
 					.replace(/[ 	]*export default/, function(match) { return functionString + match; })
 					.replace(/(\s*)(default:)/, function(all, indent, tail) { 
 					return indent + 'case actionTypes.' + actionName + ':'
-						+ indent + '	return handle' + actionName.charAt(0).toUpperCase() + actionName.slice(1) + '(action.payload);'
+						+ indent + '	return handle' + actionName.charAt(0).toUpperCase() + actionName.slice(1) + '(state, action.payload);'
 						+ indent + tail;
 				});
 				this.fs.write(reducerPath, reducerJS);

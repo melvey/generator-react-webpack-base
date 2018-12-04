@@ -1,4 +1,4 @@
-function handle<%= action.charAt(0).toUpperCase() + action.slice(1) %>(data) {
+function handle<%= action.charAt(0).toUpperCase() + action.slice(1) %>(state, data) {
 	const newState = {
 		<%= action %>: data
 	};
