@@ -5,5 +5,10 @@
 import {createStore} from 'redux';
 import reducer from './reducers/RootReducer';
 
-export default createStore(reducer);
+let preloadedState = {};
+if(typeof(window) !== 'undefined') {
+	preloadedState = window.__PRELOADED_STATE__;
+}
+
+export default createStore(reducer, preloadedState);
 

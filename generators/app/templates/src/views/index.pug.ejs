@@ -15,3 +15,5 @@ html(lang="en")
 
 		each script in scripts
 			script(src=script, defer)
+		script.
+			window.__PRELOADED_STATE__ = !{state}
