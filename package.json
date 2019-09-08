@@ -47,7 +47,6 @@
   },
   "repository": "melvey/generator-react-webpack-base",
   "scripts": {
-    "prepare": "gulp prepublish",
     "test": "gulp"
   },
   "license": "Apache-2.0"
