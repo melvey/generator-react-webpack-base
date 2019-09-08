@@ -23,14 +23,11 @@ var AppTemplate = {
 					{
 						loader: 'css-loader',
 						options: {
-								loader: 'css-loader',
-								options: {
-									modules: {
-										localIdentName: '[name]__[local]--[hash:base64:5]',
-									},
-									localsConvention: 'camelCase',
-								}
-							}
+							modules: {
+								localIdentName: '[name]__[local]--[hash:base64:5]',
+							},
+							localsConvention: 'camelCase',
+						}
 					},
 					'postcss-loader',
 					{
