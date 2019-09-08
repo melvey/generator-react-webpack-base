@@ -4,7 +4,7 @@ var BaseConfig = require('./webpack.base.config');
 var config = require('../src/config/general.js');
 
 var AppTemplate = {
-	entry: ['babel-polyfill', './src/app.js'],
+	entry: ['@babel/polyfill', './src/app.js'],
 	output: {
 			publicPath: config.basePath,
 			path: path.join(__dirname, '../build/public'),
@@ -23,17 +23,18 @@ var AppTemplate = {
 					{
 						loader: 'css-loader',
 						options: {
-							modules: true,
-							camelCase: true,
-							localIdentName: '[name]__[local]--[hash:base64:5]',
-						}
+								loader: 'css-loader',
+								options: {
+									modules: {
+										localIdentName: '[name]__[local]--[hash:base64:5]',
+									},
+									localsConvention: 'camelCase',
+								}
+							}
 					},
 					'postcss-loader',
 					{
-						loader: 'sass-loader',
-						options: {
-							outputStyle: 'expanded'
-						}
+						loader: 'sass-loader'
 					}
 				]
 			}

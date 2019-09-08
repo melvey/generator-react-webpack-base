@@ -9,7 +9,7 @@ var BaseConfig = require('./webpack.base.config');
 
  ServerTemplate = {
 
-	entry: ['babel-polyfill', './src/server.js'],
+	entry: ['@babel/polyfill', './src/server.js'],
 	output: {
 		publicPath: config.basePath,
 		path: path.join(__dirname, '../build/public'),
@@ -38,17 +38,18 @@ var BaseConfig = require('./webpack.base.config');
 					{
 						loader: 'css-loader',
 						options: {
-							modules: true,
-							camelCase: true,
-							localIdentName: '[name]__[local]--[hash:base64:5]',
+							loader: 'css-loader',
+							options: {
+								modules: {
+									localIdentName: '[name]__[local]--[hash:base64:5]',
+								},
+								localsConvention: 'camelCase',
+							}
 						}
 					},
 					'postcss-loader',
 					{
-						loader: 'sass-loader',
-						options: {
-							outputStyle: 'expanded'
-						}
+						loader: 'sass-loader'
 					}
 			 ]
 			},

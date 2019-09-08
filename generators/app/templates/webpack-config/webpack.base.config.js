@@ -17,7 +17,13 @@ module.exports = {
 				test: /\.jsx?$/,
 				exclude: /(node_modules|bower_components)/,
 				use: [
-					'babel-loader?presets[]=react,presets[]=stage-0'
+					{
+						loader: 'babel-loader',
+						options: {
+							presets: ['@babel/preset-env', '@babel/preset-react'],
+							plugins: ["@babel/plugin-proposal-class-properties"]
+						},
+					}
 				]
 			},
 			{
