@@ -11,8 +11,16 @@ module.exports = class extends Generator {
 				type: 'input',
 				name: 'name',
 				message: 'Component name',
+			},
+			{
+				type: 'list',
+				name: 'type',
+				message: 'Would you like a pure function or classs component?',
+				choices: ['function', 'class'],
+				default: 'function'
 			}
 		];
+
 
 		return this.prompt(prompts).then(function (props) {
 			// To access props later use this.props.someAnswer;
@@ -37,8 +45,9 @@ module.exports = class extends Generator {
 			}
 		);
 
+		const template = this.props.type === 'class' ? 'class-component.jsx.ejs' : 'function-component.jsx.ejs';
 		this.fs.copyTpl(
-			this.templatePath('component.jsx.ejs'),
+			this.templatePath(template),
 			this.destinationPath(path.join(dir, cleanName + '.jsx')),
 			{
 				name: cleanName
