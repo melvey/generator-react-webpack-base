@@ -1,0 +1,19 @@
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import styles from './<%= name %>.scss';
+
+const <%= name %> = ({className}) => {
+	const fullClassName = className ? `${styles.content} ${className}` : styles.content;
+
+	return (
+		<div className={fullClassName}>
+		</div>
+	);
+
+}
+
+<%= name %>.propTypes = {
+	className: PropTypes.string
+};
+
+export default <%= name %>;
