@@ -12,7 +12,8 @@ describe('generator-react-webpack-base:app', function () {
 
   it('creates files', function () {
     assert.file([
-      'dummyfile.txt'
+      'package.json',
+      'webpack.config.js'
     ]);
   });
 });
