@@ -79,8 +79,9 @@ module.exports = class extends Generator {
 		this.fs.copy(this.templatePath('webpack-config/*.js'), this.destinationPath('webpack-config'));
 		this.fs.copy(this.templatePath('src/components/**/*'), this.destinationPath('src/components'));
 		this.fs.copy(this.templatePath('src/config/**/*'), this.destinationPath('src/config/templates'));
-		console.log(this.destinationPath('src/public'));
-		mkdirp.sync(this.destinationPath('src/public'));
+
+		// webpack copy plugin now fails if there are no files to copy so put a dummy file in
+		this.fs.copy(this.templatePath('src/public/**/*'), this.destinationPath('src/public'));
 
 		if(this.props.redux) {
 			this.fs.copy(this.templatePath('src/redux/**/*'), this.destinationPath('src/redux'));
