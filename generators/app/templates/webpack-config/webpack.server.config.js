@@ -22,7 +22,7 @@ var BaseConfig = require('./webpack.base.config');
 	},
 	plugins: [
 		new MiniCssExtractPlugin({filename: 'style.css'}),
-		new CopyWebpackPlugin([{from: 'src/public', to: '.'}]),
+		new CopyWebpackPlugin({patterns: [{from: 'src/public', to: '.'}]}),
 		new webpack.DefinePlugin({
 			'global.GENTLY': false
 		})
