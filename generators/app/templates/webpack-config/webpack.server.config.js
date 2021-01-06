@@ -40,8 +40,8 @@ var BaseConfig = require('./webpack.base.config');
 						options: {
 							modules: {
 								localIdentName: '[name]__[local]--[hash:base64:5]',
-							},
-							localsConvention: 'camelCase',
+								exportLocalsConvention: 'camelCase'
+							}
 						}
 					},
 					'postcss-loader',
