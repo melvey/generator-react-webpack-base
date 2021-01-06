@@ -25,8 +25,8 @@ var AppTemplate = {
 						options: {
 							modules: {
 								localIdentName: '[name]__[local]--[hash:base64:5]',
-							},
-							localsConvention: 'camelCase',
+								exportLocalsConvention: 'camelCase'
+							}
 						}
 					},
 					'postcss-loader',
